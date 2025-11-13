@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Response
 from docs import tags_metadata
+from routes.notas import nota
 
 
 app = FastAPI(
@@ -15,3 +16,7 @@ app = FastAPI(
 @app.get("/status", tags=["get-status"])
 def get_status():
     return Response(status_code=200)
+
+
+# Se llama las rutas de los endpoints
+app.include_router(nota)
