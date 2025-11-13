@@ -44,3 +44,63 @@ def get_nota_by_id(id: str):
         raise HTTPException(
             status_code=500, detail=f"Error de conexion con la db: {str(e)}"
         )
+
+
+@nota.post("/notas", tags=["Nota"], response_model=Nota)
+def create_nota(nota: Nota):
+    new_nota = dict(nota)
+
+    try:
+        id = db["nota"].insert_one(new_nota).inserted_id
+        nota = db["nota"].find_one({"_id": id})
+        return notaEntity(nota)
+    except PyMongoError as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error al momento de insertar la nota en bd: {str(e)}"
+        )
+
+
+@nota.put("/notas/{id}", tags=["Nota"], response_model=Nota)
+def update_nota(id: str, nota: Nota):
+    notaTemp = dict(nota)
+
+    try:
+        notaDb = db["nota"].find_one({"_id": ObjectId(id)})
+        if not notaDb:
+            raise HTTPException(
+                status_code=404, detail="Nota no encontrada"
+            )
+        # Solo obtener los campos enviados
+        incoming_data = nota.model_dump(exclude_unset=True)
+
+        # Se trae la data de la db para tenerla de base
+        updated_date = notaDb.copy()
+
+        # Se actualiza lo que se envia
+        for field, value in incoming_data.items():
+            updated_date[field] = value
+
+        # Con toda la data organizada se busca y se hace el update en la db
+        resultado = db["nota"].find_one_and_update(
+            {"_id": ObjectId(id)},
+            {"$set": updated_date},
+            return_document=True
+        )
+        return notaEntity(resultado)
+    except PyMongoError as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error al modificar nota: {str(e)}"
+        )
+
+
+@nota.delete("/notas/{id}", tags=["Nota"])
+def delete_nota(id: str):
+
+    try:
+        db["nota"].find_one_and_delete({"_id": ObjectId(id)})
+        return Response(status_code=204)
+
+    except PyMongoError as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error al eliminar nota: {str(e)}"
+        )
