@@ -1,0 +1,18 @@
+# Archivos y Carpetas Generales
+**/.git
+**/.gitignore
+**/.vscode
+**/temp
+**/tmp
+
+# Archivos de Entorno y Seguridad
+**/.env
+**/*.log
+**/*.pem
+
+# Carpetas de Caché y Compilación (Python)
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/venv
+**/env
