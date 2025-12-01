@@ -1,0 +1,50 @@
+# -----------------------------------------------------------
+# 1. Carpetas de Entorno y Manejo de Dependencias
+# -----------------------------------------------------------
+
+# Excluye cualquier entorno virtual de desarrollo (ej. creado con poetry/pipenv/venv)
+venv
+.venv
+
+# Excluye la carpeta de caché de pip, que ya instalamos en la etapa builder.
+.pip_cache
+pip-cache
+
+# -----------------------------------------------------------
+# 2. Archivos de Gestión de Código y Herramientas
+# -----------------------------------------------------------
+
+# Directorios de Git
+.git
+.gitignore
+
+# Archivos de caché de Python (innecesarios en la imagen)
+__pycache__
+*.pyc
+*.pyo
+
+# Carpetas de caché de herramientas de desarrollo (linters, tests)
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# -----------------------------------------------------------
+# 3. Configuraciones Locales y Archivos Temporales
+# -----------------------------------------------------------
+
+# Configuraciones específicas del IDE (ej. VS Code, PyCharm)
+.vscode
+.idea
+
+# Logs, bases de datos locales, y otros archivos temporales
+*.log
+*.sqlite
+*.db
+
+# -----------------------------------------------------------
+# 4. Archivos Sensibles y de Variables de Entorno
+# -----------------------------------------------------------
+
+# Variables de entorno locales
+.env
+.env.*

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response
-from docs import tags_metadata
-from routes.notas import nota
+from .docs import tags_metadata
+from .routes.notas import nota
 
 
 app = FastAPI(

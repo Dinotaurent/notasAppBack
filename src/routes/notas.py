@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Response
-from config.db import db
-from schemas.nota import notaEntity, notasEntity
-from models.nota import Nota
+from ..config.db import db
+from ..schemas.nota import notaEntity, notasEntity
+from ..models.nota import Nota
 from pymongo.errors import PyMongoError
 from bson import ObjectId
 
