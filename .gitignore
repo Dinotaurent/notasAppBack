@@ -1,1 +1,51 @@
 .env
+.env.local
+.env.*.local
+.env.development
+.env.production
+config/secrets.json
+config/local_settings.py
+
+# Entorno Virtual (VENV)
+/venv/
+.venv
+env/
+.env/
+
+# Archivos de Bytecode y Caché
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Artefactos de Build y Distribución
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Logs
+*.log
+/logs
+
+
+# Ignorar el contexto de la base de datos local (volúmenes de datos)
+mongo-vol/
+/data/db/
+/pgdata/
+
+# Caché de Docker/BuildKit
+.dockerignore
+.docker/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDEs (VS Code, JetBrains)
+.vscode/
+.idea/
+*.swp
